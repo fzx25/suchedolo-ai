@@ -1,0 +1,6 @@
+flask==3.0.3
+Flask
+Flask-Mail
+Flask-APScheduler
+openai
+python-dotenv

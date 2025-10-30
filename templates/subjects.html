@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>📚 Subjects</h1>
+
+<form method="POST" class="add-form">
+  <input type="text" name="name" placeholder="Subject name">
+  <button type="submit">Add</button>
+</form>
+
+<ul>
+  {% for s in subjects %}
+    <li>
+      <span>{{ s["name"] }}</span>
+      <form method="POST" action="{{ url_for('subjects.delete_subject', sid=s['id']) }}" style="display:inline;">
+        <button type="submit">🗑️ Delete</button>
+      </form>
+    </li>
+  {% else %}
+    <p>No subjects yet. Add one above.</p>
+  {% endfor %}
+</ul>
+{% endblock %}

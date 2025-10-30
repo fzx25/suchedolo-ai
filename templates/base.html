@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if lang == 'ar' else 'ltr' }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title or "Suchdolo" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+
+<body>
+  <!-- 🌐 Navigation Bar -->
+  {% if session.get('username') %}
+<nav class="navbar">
+  <a href="{{ url_for('classes.classes') }}">📘 {{ t['classes'] }}</a>
+  <a href="{{ url_for('subjects.subjects') }}">📚 {{ t['subjects'] }}</a>
+  <a href="{{ url_for('ai.generate_timetable') }}">🧠 {{ t['timetable'] }}</a>
+  <a href="{{ url_for('study.study_plan') }}">🗓️ {{ t['study_plan'] }}</a>
+  <a href="{{ url_for('exams.exams') }}">🧾 {{ t['exams'] }}</a>
+  <a href="{{ url_for('homeworks.homeworks') }}">🏡 {{ t['homeworks'] }}</a>
+  <a href="{{ url_for('ai_chat.ai_chat') }}">💬 Chat</a>
+  <a href="{{ url_for('future_vision') }}">☀️ {{ t['future_vision'] }}</a>
+  <a href="{{ url_for('auth.logout') }}">📒 {{ t['logout'] }}</a>
+
+  {% if lang == 'ar' %}
+    <a href="{{ url_for('lang.set_language', lang_code='en') }}">🇬🇧 English</a>
+  {% else %}
+    <a href="{{ url_for('lang.set_language', lang_code='ar') }}">🇸🇦 العربية</a>
+  {% endif %}
+  </nav>
+  {% endif %}
+
+
+  <!-- 💬 Flash Messages -->
+  <div class="content">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- 📄 Page Content -->
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- 🧭 Footer -->
+ <footer>
+    <p>© 2025 Suchdolo | {{ t['footer'] }}</p>
+</footer>
+
+</body>
+</html>

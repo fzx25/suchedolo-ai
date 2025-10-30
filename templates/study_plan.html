@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>📚 Study Plan Generator</h1>
+
+<form method="POST">
+  <label>How many hours per day do you want to study?</label>
+  <input type="number" name="hours" min="1" max="12" required>
+
+  <label>How many subjects per day?</label>
+  <input type="number" name="subjects_per_day" min="1" max="5" required>
+
+  <button type="submit">Generate Plan</button>
+</form>
+
+{% if study_schedule %}
+  <h2>Your Personalized Study Plan</h2>
+  <table>
+    <tr><th>Day</th><th>Subjects</th><th>Hours Each</th></tr>
+    {% for day in study_schedule %}
+      <tr>
+        <td>{{ day.day }}</td>
+      <td>
+        {% for subj in day.subjects %}
+          {{ subj.name if subj.name else subj }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+      </td>
+        <td>{{ day.hours_each }} hr</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+{% endblock %}

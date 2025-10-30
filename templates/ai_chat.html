@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Schedolo AI Assistant{% endblock %}
+
+{% block content %}
+<div class="ai-chat-wrapper">
+  <div class="ai-chat-box">
+    <h2>🤖 <b>Schedolo AI Assistant</b></h2>
+
+    <div id="chatbox"></div>
+
+    <div class="ai-chat-input">
+      <input id="message" type="text" placeholder="اكتب رسالتك هنا...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+async function sendMessage() {
+  const input = document.getElementById("message");
+  const message = input.value.trim();
+  if (!message) return;
+
+  const chatbox = document.getElementById("chatbox");
+  chatbox.innerHTML += `<p><b>👤 You:</b> ${message}</p>`;
+  input.value = "";
+
+  const response = await fetch("/ai_chat/ask", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ "message": message })
+  });
+
+  const data = await response.json();
+  chatbox.innerHTML += `<p><b>🤖 AI:</b> ${data.reply}</p>`;
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
+</script>
+{% endblock %}

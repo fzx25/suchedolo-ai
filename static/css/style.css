@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root{
+  --bg:#0B1020; --panel:#121A2B; --card:#10192B; --text:#EAF2FF; --muted:#96A3C2;
+  --primary:#60A5FA; --neon:#22D3EE; --accent:#8B5CF6; --ok:#22C55E; --err:#EF4444;
+  --ring:0 0 0 2px color-mix(in oklab, var(--neon) 60%, transparent);
+}
+
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:
+radial-gradient(1200px 600px at 10% -10%, rgba(34,211,238,.12), transparent 60%),
+radial-gradient(900px 500px at 110% 20%, rgba(139,92,246,.10), transparent 60%),
+linear-gradient(180deg, #0B1020, #0B1020); color:var(--text); font-family:Poppins,system-ui}
+
+.navbar{position:sticky;top:0;z-index:40;display:flex;gap:22px;justify-content:center;
+padding:14px 18px;background:color-mix(in oklab, var(--panel) 86%, #0B1020 14%);
+backdrop-filter:blur(8px); border-bottom:1px solid #1d2740}
+.navbar a{color:var(--text);text-decoration:none;font-weight:700;letter-spacing:.2px}
+.navbar a:hover{color:var(--neon);text-shadow:0 0 10px var(--neon)}
+
+.content{flex:1;max-width:960px;margin:38px auto;padding:26px;border:1px solid #1b2540;
+background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.03);
+animation:fade .5s ease-out}
+@keyframes fade{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:none}}
+
+h1{margin:0 0 10px; text-align:center; font-size:28px; color:var(--primary);
+text-shadow:0 0 12px rgba(96,165,250,.45)}
+p{color:var(--muted)}
+
+.add-form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:16px 0 20px}
+input,button{border:none;border-radius:12px;padding:11px 14px;font-size:14px;transition:.25s}
+input{background:#0f1a33;color:var(--text);border:1px solid #1c2742}
+input:focus{outline:none;box-shadow:var(--ring);border-color:color-mix(in oklab, var(--neon) 60%, #1c2742)}
+button{background:linear-gradient(135deg, var(--neon), var(--accent)); color:#07111e; font-weight:800}
+button:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(34,211,238,.25)}
+
+.flash{padding:10px 12px;border-radius:12px;margin-bottom:10px;text-align:center;font-weight:700}
+.flash.success{background:color-mix(in oklab, var(--ok) 35%, #0f1a33); border:1px solid color-mix(in oklab, var(--ok) 60%, transparent)}
+.flash.error{background:color-mix(in oklab, var(--err) 35%, #0f1a33); border:1px solid color-mix(in oklab, var(--err) 60%, transparent)}
+
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;justify-content:space-between;align-items:center;background:#0f1a33;
+border:1px solid #1c2742;border-radius:12px;margin:8px 0;padding:12px 14px;
+animation:slide .25s ease}
+@keyframes slide{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+
+footer{padding:16px;text-align:center;color:var(--muted);border-top:1px solid #1d2740}
+/* Stylish Dropdown (matches dashboard theme) */
+select {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid #1c2742;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 14px;
+  transition: 0.25s;
+  cursor: pointer;
+  appearance: none; /* hide default arrow */
+}
+
+select:hover {
+  border-color: var(--neon);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--neon);
+  box-shadow: var(--ring);
+}
+
+option {
+  background-color: var(--panel);
+  color: var(--text);
+}
+
+/* Label styling for better readability */
+label {
+  font-weight: 600;
+  color: var(--muted);
+  margin-right: 8px;
+}
+/* 🌙 AI Chat Styling */
+#chatBox {
+  width: 100%;
+  height: 400px;
+  background: #0f1a33;
+  border: 1px solid #1c2742;
+  border-radius: 16px;
+  padding: 12px;
+  color: var(--text);
+  overflow-y: auto;
+  font-size: 15px;
+  line-height: 1.6;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+}
+
+#chatBox p {
+  margin: 6px 0;
+  padding: 6px 10px;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+
+#chatBox p strong {
+  color: var(--neon);
+}
+
+#userInput {
+  width: 80%;
+  padding: 10px 12px;
+  margin-top: 10px;
+  border: 1px solid #1c2742;
+  border-radius: 12px;
+  background: #10192B;
+  color: var(--text);
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+#userInput:focus {
+  outline: none;
+  border-color: var(--neon);
+  box-shadow: 0 0 8px var(--neon);
+}
+
+#sendBtn {
+  background: linear-gradient(135deg, var(--neon), var(--accent));
+  color: #07111e;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+#sendBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(34,211,238,.25);
+}
+
+.vision-section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid #1b2540;
+  color: var(--text);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: fadeIn 0.6s ease;
+}
+
+.vision-section h1, .vision-section h2 {
+  color: var(--neon);
+  text-shadow: 0 0 10px rgba(34,211,238,0.4);
+}
+
+.vision-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.vision-section li {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  background: #0f1a33;
+  border: 1px solid #1c2742;
+  transition: 0.3s;
+}
+
+.vision-section li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(34,211,238,0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* ===============================
+🌟 Schedolo AI Chat - Unified Box Design
+=============================== */
+
+/* الحاوية العامة */
+.chat-container {
+  width: 600px;
+  height: 80vh;
+  margin: 50px auto;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* العنوان */
+.chat-header {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #64ffda;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-header::before {
+  content: "🤖 ";
+}
+
+/* مربع الرسائل */
+.chat-box {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0;
+  padding: 20px;
+  overflow-y: auto;
+  color: #e6f1ff;
+  scroll-behavior: smooth;
+}
+
+/* رسائل المستخدم */
+.message.user {
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  color: #fff;
+  border-radius: 15px 15px 0 15px;
+  margin: 10px 0;
+  padding: 12px 16px;
+  max-width: 75%;
+  align-self: flex-end;
+  font-weight: 500;
+  box-shadow: 0 4px 8px rgba(56, 189, 248, 0.3);
+}
+
+/* رسائل AI */
+.message.ai {
+  background: rgba(100, 255, 218, 0.1);
+  border: 1px solid rgba(100, 255, 218, 0.4);
+  border-radius: 15px 15px 15px 0;
+  margin: 10px 0;
+  padding: 12px 16px;
+  max-width: 75%;
+  color: #cbeaff;
+  box-shadow: 0 3px 8px rgba(100, 255, 218, 0.2);
+}
+
+/* منطقة الكتابة المدمجة */
+.input-area {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* مربع الكتابة */
+.input-area input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(100, 255, 218, 0.3);
+  border-radius: 12px 0 0 12px;
+  padding: 12px 16px;
+  color: #e6f1ff;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-area input::placeholder {
+  color: #9eb1c5;
+}
+
+.input-area input:focus {
+  border-color: #64ffda;
+  box-shadow: 0 0 8px rgba(100, 255, 218, 0.3);
+}
+
+/* زر الإرسال */
+.input-area button {
+  background: linear-gradient(90deg, #56ccf2, #2f80ed);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 0 12px 12px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.input-area button:hover {
+  background: linear-gradient(90deg, #2f80ed, #56ccf2);
+  transform: scale(1.03);
+}
+
+/* حركات */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message {
+  animation: fadeIn 0.3s ease;
+}
+
+/* متجاوب */
+@media (max-width: 600px) {
+  .chat-container {
+    width: 90%;
+    height: 85vh;
+  }
+}

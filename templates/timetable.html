@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🧠 AI Timetable Generator</h1>
+
+<form method="POST">
+  <label>Select Role:</label>
+  <select name="role" id="roleSelect" required onchange="toggleFreeOptions()">
+    <option value="">-- Choose Role --</option>
+    <option value="student">🎓 Student</option>
+    <option value="teacher">🧑‍🏫 Teacher</option>
+  </select>
+
+  <div id="teacherOptions" style="display:none; margin-top:10px;">
+    <label>Minimum Free Periods:</label>
+    <input type="number" name="min_free" min="1" max="6" value="1">
+    <label>Maximum Free Periods:</label>
+    <input type="number" name="max_free" min="1" max="6" value="4">
+  </div>
+
+  <button type="submit">Generate Timetable</button>
+</form>
+
+<script>
+function toggleFreeOptions() {
+  const role = document.getElementById("roleSelect").value;
+  document.getElementById("teacherOptions").style.display =
+      role === "teacher" ? "block" : "none";
+}
+</script>
+
+{% if timetable %}
+  <h2>{{ "Teacher" if role == "teacher" else "Student" }} Timetable</h2>
+  <table border="1" cellpadding="10">
+    <tr>
+      <th>Day</th>
+      {% for i in range(1,9) %}
+        <th>Period {{ i }}</th>
+      {% endfor %}
+    </tr>
+    {% for day, subjects in timetable.items() %}
+      <tr>
+        <td><b>{{ day }}</b></td>
+        {% for subj in subjects %}
+          <td>{{ subj }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% endblock %}
+
+
+

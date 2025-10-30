@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>📘 Homework Manager</h1>
+
+<form method="POST" class="add-form">
+  <input type="text" name="subject" placeholder="Subject" required>
+  <input type="text" name="title" placeholder="Homework Title" required>
+  <input type="date" name="due_date" required>
+  <input type="text" name="notes" placeholder="Notes (optional)">
+  <button type="submit">Add Homework</button>
+</form>
+
+{% if homeworks %}
+  <ul>
+    {% for hw in homeworks %}
+      <li>
+        <div>
+          <b>{{ hw.subject }}</b> — {{ hw.title }}
+          <br>📅 Due: {{ hw.due_date }}
+          {% if hw.notes %}<br>📝 {{ hw.notes }}{% endif %}
+        </div>
+        <a href="{{ url_for('homeworks.delete_homework', hw_id=hw.id) }}" class="btn" style="color:#EF4444;">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No homeworks yet. Add one above!</p>
+{% endif %}
+{% endblock %}

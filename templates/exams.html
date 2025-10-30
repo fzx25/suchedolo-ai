@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>🧾 Exams</h1>
+
+<form method="POST" class="add-form">
+  <input type="text" name="subject" placeholder="Subject">
+  <input type="date" name="date">
+  <button type="submit">Add</button>
+</form>
+
+<ul>
+  {% for e in exams %}
+    <li>
+      <span><strong>{{ e["subject"] }}</strong> — {{ e["date"] }}</span>
+      <form method="POST" action="{{ url_for('exams.delete_exam', eid=e['id']) }}" style="display:inline;">
+        <button type="submit">🗑️ Delete</button>
+      </form>
+    </li>
+  {% else %}
+    <p>No exams yet. Add one above.</p>
+  {% endfor %}
+</ul>
+{% endblock %}
